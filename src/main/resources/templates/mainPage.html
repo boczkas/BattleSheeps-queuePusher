@@ -6,15 +6,15 @@
 </head>
 
 <body>
-<h1>Sender</h1>
+<h1>Send to queue:</h1>
 <form action="#" th:action="@{/}" th:object="${queueResolver}" method="post">
     <!--<p>Name: <input type="text" th:field="*{queueName}" /></p>-->
     <p><select th:field="*{queueName}">
-        <option type="text"  value="PlayerRegistrationQueueTest">PlayerRegistrationQueueTest</option>
+        <option type="text" value="">Select Queue</option>
+        <option type="text" th:each="queue :${queues}" th:value="${queue}" th:text="${queue}"></option>
     </select></p>
-    <p><input type="submit" value="Submit" /></p>
+    <p><input type="submit" value="Send" /></p>
 </form>
-
 
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.jakubowskiprzemyslaw.queue_pusher.ObjectSender;
 import pl.jakubowskiprzemyslaw.queue_pusher.QueueResolver;
+import pl.jakubowskiprzemyslaw.queue_pusher.data.QueueType;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -25,14 +26,17 @@ public class QueueController {
     @GetMapping(value = "/")
     public String getPage(Model model) {
         model.addAttribute("queueResolver", new QueueResolver());
-        model.addAttribute("queues", Arrays.asList("PlayerRegistrationQueueTest","GameConfigurationRegistrationQueueTest"));
+        model.addAttribute("queues", QueueType.asList());
         return "mainPage";
     }
 
-    @PostMapping(value = "/")
+    @PostMapping(value = "/", produces = "text/plain")
     public String queueResolverSubmit(@ModelAttribute("queueResolver") QueueResolver queueResolver, HttpServletRequest request) {
         System.out.println(queueResolver.getQueueName());
-        objectSender.sendObject(queueResolver.getDefaultObject(), queueResolver.getQueueName());
-        return "mainPage";
+        if (queueResolver.getQueueName().equals("")) {
+            return "redirect:/";
+        }
+        objectSender.sendObject(queueResolver.getQueueName());
+        return "redirect:/";
     }
 }
