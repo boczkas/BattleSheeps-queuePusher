@@ -1,4 +1,4 @@
-package pl.jakubowskiprzemyslaw.queue_pusher.models;
+package pl.jakubowskiprzemyslaw.queue_pusher.models.playeraction;
 
 import java.io.Serializable;
 
