@@ -6,6 +6,8 @@ import pl.jakubowskiprzemyslaw.tajgertim.models.player.Player;
 import pl.jakubowskiprzemyslaw.tajgertim.models.playeraction.PlayerAction;
 import pl.jakubowskiprzemyslaw.tajgertim.models.playeraction.action.Move;
 import pl.jakubowskiprzemyslaw.tajgertim.models.playeraction.action.Shot;
+import pl.jakubowskiprzemyslaw.tajgertim.models.round.NextRoundStatus;
+import pl.jakubowskiprzemyslaw.tajgertim.models.shoot.PlayerShootCoordinate;
 import pl.jakubowskiprzemyslaw.tajgertim.models.shoot.PlayerShootResult;
 
 import java.util.Arrays;
@@ -148,7 +150,7 @@ public enum QueueType {
 
         @Override
         public QueueObject createObjectToSend() {
-            return null;
+            return new PlayerShootCoordinate();
         }
 
         @Override
@@ -168,11 +170,11 @@ public enum QueueType {
             return "13";
         }
     },
-    PlayingStateMachineNextPlayerOrGameEndQueueTest { //14
+    PlayingStateMachineNextRoundStatusQueueTest { //14
 
         @Override
         public QueueObject createObjectToSend() {
-            return null;
+            return new NextRoundStatus();
         }
 
         @Override
