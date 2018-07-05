@@ -1,0 +1,35 @@
+1 PlayerRegistrationQueue
+
+2 GameConfigurationRegistrationQueue
+
+3 FleetPlacementSizeQueue
+
+4 FleetPlacementQueue
+
+5 GameReadyValidationQueue
+
+6 BoardHandlerPlayerQueue
+
+7 BoardHandlerFleetPlacementQueue
+
+8 JudgeStartQueue
+
+9 PlayingStateMachinePlayerActionQueue
+
+10 ShotHandlerPlayerShotQueue
+
+11 MoveHandlerPlayerMoveQueue
+
+12 BoardHandlerShotQueryQueue
+
+13 BoardHandlerMoveQueryQueue
+
+14 PlayingStateMachineNextPlayerOrGameEndQueue
+
+15 JudgePlayerShootResultQueue
+
+16 JudgePlayerMoveResultQueue
+
+17 ShotHandlerCoordinateStatusQueue
+
+18 PlayerStateMachineBoardStatusQueue

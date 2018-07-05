@@ -7,7 +7,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.jakubowskiprzemyslaw.queue_pusher.data.QueueType;
-import pl.jakubowskiprzemyslaw.queue_pusher.models.QueueObject;
+import pl.jakubowskiprzemyslaw.tajgertim.models.QueueObject;
 
 @Component
 public class ObjectSender {

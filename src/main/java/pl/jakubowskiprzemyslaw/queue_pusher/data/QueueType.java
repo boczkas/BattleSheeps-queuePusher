@@ -1,9 +1,12 @@
 package pl.jakubowskiprzemyslaw.queue_pusher.data;
 
-import pl.jakubowskiprzemyslaw.queue_pusher.models.QueueObject;
-import pl.jakubowskiprzemyslaw.queue_pusher.models.playeraction.Player;
-import pl.jakubowskiprzemyslaw.queue_pusher.models.playeraction.PlayerAction;
-import pl.jakubowskiprzemyslaw.queue_pusher.models.playeraction.action.Shot;
+import pl.jakubowskiprzemyslaw.tajgertim.models.QueueObject;
+import pl.jakubowskiprzemyslaw.tajgertim.models.coordinates.CoordinateStatus;
+import pl.jakubowskiprzemyslaw.tajgertim.models.player.Player;
+import pl.jakubowskiprzemyslaw.tajgertim.models.playeraction.PlayerAction;
+import pl.jakubowskiprzemyslaw.tajgertim.models.playeraction.action.Move;
+import pl.jakubowskiprzemyslaw.tajgertim.models.playeraction.action.Shot;
+import pl.jakubowskiprzemyslaw.tajgertim.models.shoot.PlayerShootResult;
 
 import java.util.Arrays;
 
@@ -133,7 +136,7 @@ public enum QueueType {
 
         @Override
         public QueueObject createObjectToSend() {
-            return new PlayerAction(new Player(), new Shot());
+            return new PlayerAction(new Player(), new Move());
         }
 
         @Override
@@ -181,7 +184,7 @@ public enum QueueType {
 
         @Override
         public QueueObject createObjectToSend() {
-            return null;
+            return new PlayerShootResult();
         }
 
         @Override
@@ -206,7 +209,7 @@ public enum QueueType {
 
         @Override
         public QueueObject createObjectToSend() {
-            return null;
+            return new CoordinateStatus();
         }
 
         @Override
