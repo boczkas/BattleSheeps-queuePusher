@@ -16,7 +16,7 @@ public class ObjectSender {
     private final RabbitAdmin rabbitAdmin;
 
     @Autowired
-    public ObjectSender(final RabbitTemplate rabbitTemplate) {
+    public ObjectSender(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
         this.rabbitAdmin = new RabbitAdmin(rabbitTemplate);
     }

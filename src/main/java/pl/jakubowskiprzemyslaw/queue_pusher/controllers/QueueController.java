@@ -11,7 +11,9 @@ import pl.jakubowskiprzemyslaw.queue_pusher.QueueResolver;
 import pl.jakubowskiprzemyslaw.queue_pusher.data.QueueType;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 
 @Controller
 public class QueueController {
@@ -24,9 +26,11 @@ public class QueueController {
     }
 
     @GetMapping(value = "/")
-    public String getPage(Model model) {
+    public String getPage(Model model, HttpServletRequest request) {
         model.addAttribute("queueResolver", new QueueResolver());
         model.addAttribute("queues", QueueType.asList());
+        String objectSent = (String)request.getSession().getAttribute("objectSent");
+        model.addAttribute("objectSent", objectSent);
         return "mainPage";
     }
 
@@ -37,6 +41,9 @@ public class QueueController {
             return "redirect:/";
         }
         objectSender.sendObject(queueResolver.getQueueName());
+        String timeStamp = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
+        request.getSession().setAttribute("objectSent",timeStamp + " | " + QueueType.valueOf(queueResolver.getQueueName()).createObjectToSend().toString());
+
         return "redirect:/";
     }
 }

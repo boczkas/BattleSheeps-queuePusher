@@ -12,4 +12,11 @@ public class PlayerAction implements QueueObject {
         this.action = action;
     }
 
+    @Override
+    public String toString() {
+        return "PlayerAction{" +
+                "player=" + player +
+                ", action=" + action +
+                '}';
+    }
 }

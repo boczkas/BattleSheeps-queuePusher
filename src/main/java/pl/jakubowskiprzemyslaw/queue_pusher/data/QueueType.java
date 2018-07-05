@@ -8,43 +8,113 @@ import pl.jakubowskiprzemyslaw.queue_pusher.models.playeraction.action.Shot;
 import java.util.Arrays;
 
 public enum QueueType {
-//    PlayerRegistrationQueueTest { //1
-//
-//        @Override
-//        public QueueObject createObjectToSend() {
-//            return null;
-//        }
-//    },
-//    GameConfigurationRegistrationQueueTest { //2
-//
-//        @Override
-//        public QueueObject createObjectToSend() {
-//            return null;
-//        }
-//    },
-    //    FleetPlacementSizeQueueTest { //3
-//
-//    },
-//    FleetPlacementQueueTest { //4
-//
-//    },
-//    GameReadyValidationQueueTest { //5
-//
-//    },
-//    BoardHandlerPlayerQueueTest { //6
-//
-//    },
-//    BoardHandlerFleetPlacementQueueTest { //7
-//
-//    },
-//    JudgeStartQueueTest { //8
-//
-//    },
+    PlayerRegistrationQueueTest { //1
+
+        @Override
+        public QueueObject createObjectToSend() {
+            return null;
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "1";
+        }
+    },
+    GameConfigurationRegistrationQueueTest { //2
+
+        @Override
+        public QueueObject createObjectToSend() {
+            return null;
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "2";
+        }
+    },
+    FleetPlacementSizeQueueTest { //3
+
+        @Override
+        public QueueObject createObjectToSend() {
+            return null;
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "3";
+        }
+    },
+    FleetPlacementQueueTest { //4
+
+        @Override
+        public QueueObject createObjectToSend() {
+            return null;
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "4";
+        }
+    },
+    GameReadyValidationQueueTest { //5
+
+        @Override
+        public QueueObject createObjectToSend() {
+            return null;
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "5";
+        }
+    },
+    BoardHandlerPlayerQueueTest { //6
+
+        @Override
+        public QueueObject createObjectToSend() {
+            return null;
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "6";
+        }
+    },
+    BoardHandlerFleetPlacementQueueTest { //7
+
+        @Override
+        public QueueObject createObjectToSend() {
+            return null;
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "7";
+        }
+    },
+    JudgeStartQueueTest { //8
+
+        @Override
+        public QueueObject createObjectToSend() {
+            return null;
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "8";
+        }
+    },
+
     PlayingStateMachinePlayerActionQueueTest { //9
 
         @Override
         public QueueObject createObjectToSend() {
             return new PlayerAction(new Player(), new Shot());
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "9";
         }
     },
     ShotHandlerPlayerShotQueueTest { //10
@@ -53,6 +123,11 @@ public enum QueueType {
         public QueueObject createObjectToSend() {
             return new PlayerAction(new Player(), new Shot());
         }
+
+        @Override
+        public String getQueueNumber() {
+            return "10";
+        }
     },
     MoveHandlerPlayerMoveQueueTest { //11
 
@@ -60,18 +135,46 @@ public enum QueueType {
         public QueueObject createObjectToSend() {
             return new PlayerAction(new Player(), new Shot());
         }
+
+        @Override
+        public String getQueueNumber() {
+            return "11";
+        }
     },
-    //    BoardHandlerShotQueryQueueTest { //12
-//
-//    },
-//    BoardHandlerMoveQueryQueueTest { //13
-//
-//    },
+    BoardHandlerShotQueryQueueTest { //12
+
+        @Override
+        public QueueObject createObjectToSend() {
+            return null;
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "12";
+        }
+    },
+    BoardHandlerMoveQueryQueueTest { //13
+
+        @Override
+        public QueueObject createObjectToSend() {
+            return null;
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "13";
+        }
+    },
     PlayingStateMachineNextPlayerOrGameEndQueueTest { //14
 
         @Override
         public QueueObject createObjectToSend() {
             return null;
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "14";
         }
     },
     JudgePlayerShootResultQueueTest { //15
@@ -80,20 +183,47 @@ public enum QueueType {
         public QueueObject createObjectToSend() {
             return null;
         }
+
+        @Override
+        public String getQueueNumber() {
+            return "15";
+        }
     },
-//    JudgePlayerMoveResultQueue { //16
-//
-//    },
-    ShotHandlerCoordinateStatusQueueTest { //17
+    JudgePlayerMoveResultQueue { //16
+
         @Override
         public QueueObject createObjectToSend() {
             return null;
         }
+
+        @Override
+        public String getQueueNumber() {
+            return "16";
+        }
+
     },
-    PlayerStateMachineBoardStatusQueueTest { //18
+    ShotHandlerCoordinateStatusQueueTest { //17
+
         @Override
         public QueueObject createObjectToSend() {
             return null;
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "17";
+        }
+    },
+    PlayerStateMachineBoardStatusQueueTest { //18
+
+        @Override
+        public QueueObject createObjectToSend() {
+            return null;
+        }
+
+        @Override
+        public String getQueueNumber() {
+            return "18";
         }
     };
 
@@ -102,4 +232,11 @@ public enum QueueType {
     }
 
     public abstract QueueObject createObjectToSend();
+
+    public abstract String getQueueNumber();
+
+    public boolean isNotConfigured() {
+        return this.createObjectToSend() == null;
+    }
+
 }

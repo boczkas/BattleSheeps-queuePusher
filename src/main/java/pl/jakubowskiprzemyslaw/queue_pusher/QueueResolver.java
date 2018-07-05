@@ -1,5 +1,7 @@
 package pl.jakubowskiprzemyslaw.queue_pusher;
 
+import pl.jakubowskiprzemyslaw.queue_pusher.data.QueueType;
+
 public class QueueResolver {
     private String queueName;
 
@@ -10,5 +12,4 @@ public class QueueResolver {
     public void setQueueName(String queueName) {
         this.queueName = queueName;
     }
-
 }
