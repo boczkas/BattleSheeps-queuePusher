@@ -9,12 +9,12 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "queue")
 public class Queues {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     @JsonIgnore
     private Long id;
 
-    @NotBlank(message="Name cannot be empty")
+    @NotBlank(message = "Name cannot be empty")
     @Column(name = "queue_name", nullable = false)
     private String queueName;
 
