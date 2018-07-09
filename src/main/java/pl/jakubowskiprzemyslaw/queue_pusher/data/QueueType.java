@@ -1,16 +1,24 @@
 package pl.jakubowskiprzemyslaw.queue_pusher.data;
 
 import pl.jakubowskiprzemyslaw.tajgertim.models.QueueObject;
-import pl.jakubowskiprzemyslaw.tajgertim.models.coordinates.CoordinateStatus;
+import pl.jakubowskiprzemyslaw.tajgertim.models.board.Board;
+import pl.jakubowskiprzemyslaw.tajgertim.models.board.Mast;
+import pl.jakubowskiprzemyslaw.tajgertim.models.board.Ship;
+import pl.jakubowskiprzemyslaw.tajgertim.models.coordinates.Coordinate;
+import pl.jakubowskiprzemyslaw.tajgertim.models.coordinates.FieldState;
+import pl.jakubowskiprzemyslaw.tajgertim.models.coordinates.FieldStatus;
 import pl.jakubowskiprzemyslaw.tajgertim.models.player.Player;
 import pl.jakubowskiprzemyslaw.tajgertim.models.playeraction.PlayerAction;
-import pl.jakubowskiprzemyslaw.tajgertim.models.playeraction.action.Move;
 import pl.jakubowskiprzemyslaw.tajgertim.models.playeraction.action.Shot;
 import pl.jakubowskiprzemyslaw.tajgertim.models.round.NextRoundStatus;
 import pl.jakubowskiprzemyslaw.tajgertim.models.shoot.PlayerShootCoordinate;
 import pl.jakubowskiprzemyslaw.tajgertim.models.shoot.PlayerShootResult;
+import pl.jakubowskiprzemyslaw.tajgertim.models.view.BoardsView;
+import pl.jakubowskiprzemyslaw.tajgertim.models.view.FieldStateView;
+import pl.jakubowskiprzemyslaw.tajgertim.models.view.OpponentBoardView;
+import pl.jakubowskiprzemyslaw.tajgertim.models.view.PlayerBoardView;
 
-import java.util.Arrays;
+import java.util.*;
 
 public enum QueueType {
     PlayerRegistrationQueueTest { //1
@@ -114,7 +122,7 @@ public enum QueueType {
 
         @Override
         public QueueObject createObjectToSend() {
-            return new PlayerAction(new Player(), new Shot());
+            return new PlayerAction(new Player("", ""), new Shot(new Coordinate(0, 0)));
         }
 
         @Override
@@ -126,7 +134,7 @@ public enum QueueType {
 
         @Override
         public QueueObject createObjectToSend() {
-            return new PlayerAction(new Player(), new Shot());
+            return new PlayerAction(new Player("", ""), new Shot(new Coordinate(0, 0)));
         }
 
         @Override
@@ -138,7 +146,7 @@ public enum QueueType {
 
         @Override
         public QueueObject createObjectToSend() {
-            return new PlayerAction(new Player(), new Move());
+            return new PlayerAction(new Player("", ""), new Shot(new Coordinate(0, 0)));
         }
 
         @Override
@@ -207,11 +215,11 @@ public enum QueueType {
         }
 
     },
-    ShotHandlerCoordinateStatusQueueTest { //17
+    ShotHandlerFieldStatusQueueTest { //17
 
         @Override
         public QueueObject createObjectToSend() {
-            return new CoordinateStatus();
+            return new FieldStatus(new Coordinate(0, 0), FieldState.EMPTY, new Player("", ""));
         }
 
         @Override
@@ -219,11 +227,23 @@ public enum QueueType {
             return "17";
         }
     },
-    PlayerStateMachineBoardStatusQueueTest { //18
+    PlayingBoardsViewQueueTest { //18
 
         @Override
         public QueueObject createObjectToSend() {
-            return null;
+            List<Ship> shipList = new ArrayList<>();
+            List<Mast> mastList = new ArrayList<>();
+            mastList.add(new Mast(new Coordinate(1,1)));
+            mastList.add(new Mast(new Coordinate(1,2)));
+            mastList.add(new Mast(new Coordinate(1,3)));
+            shipList.add(new Ship(mastList));
+
+            Map<Coordinate, FieldStateView> fieldStateView = new HashMap<>();
+            fieldStateView.put(new Coordinate(5, 1), FieldStateView.HIT);
+            fieldStateView.put(new Coordinate(3, 2), FieldStateView.MISS);
+
+            return new BoardsView(new Player("Test", "TestIP"), new PlayerBoardView(new Board(shipList)),
+                                    new OpponentBoardView(fieldStateView));
         }
 
         @Override
