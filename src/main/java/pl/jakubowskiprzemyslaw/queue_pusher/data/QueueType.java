@@ -13,15 +13,15 @@ import pl.jakubowskiprzemyslaw.tajgertim.models.playeraction.action.Shot;
 import pl.jakubowskiprzemyslaw.tajgertim.models.round.NextRoundStatus;
 import pl.jakubowskiprzemyslaw.tajgertim.models.shoot.PlayerShootCoordinate;
 import pl.jakubowskiprzemyslaw.tajgertim.models.shoot.PlayerShootResult;
+import pl.jakubowskiprzemyslaw.tajgertim.models.shoot.ShootResult;
 import pl.jakubowskiprzemyslaw.tajgertim.models.view.BoardsView;
-import pl.jakubowskiprzemyslaw.tajgertim.models.view.FieldStateView;
 import pl.jakubowskiprzemyslaw.tajgertim.models.view.OpponentBoardView;
 import pl.jakubowskiprzemyslaw.tajgertim.models.view.PlayerBoardView;
 
 import java.util.*;
 
 public enum QueueType {
-    PlayerRegistrationQueueTest { //1
+    PlayerRegistrationQueue { //1
 
         @Override
         public QueueObject createObjectToSend() {
@@ -33,7 +33,7 @@ public enum QueueType {
             return "1";
         }
     },
-    GameConfigurationRegistrationQueueTest { //2
+    GameConfigurationRegistrationQueue { //2
 
         @Override
         public QueueObject createObjectToSend() {
@@ -45,7 +45,7 @@ public enum QueueType {
             return "2";
         }
     },
-    FleetPlacementSizeQueueTest { //3
+    FleetPlacementSizeQueue { //3
 
         @Override
         public QueueObject createObjectToSend() {
@@ -57,7 +57,7 @@ public enum QueueType {
             return "3";
         }
     },
-    FleetPlacementQueueTest { //4
+    FleetPlacementQueue { //4
 
         @Override
         public QueueObject createObjectToSend() {
@@ -69,7 +69,7 @@ public enum QueueType {
             return "4";
         }
     },
-    GameReadyValidationQueueTest { //5
+    GameReadyValidationQueue { //5
 
         @Override
         public QueueObject createObjectToSend() {
@@ -81,7 +81,7 @@ public enum QueueType {
             return "5";
         }
     },
-    BoardHandlerPlayerQueueTest { //6
+    BoardHandlerPlayerQueue { //6
 
         @Override
         public QueueObject createObjectToSend() {
@@ -93,7 +93,7 @@ public enum QueueType {
             return "6";
         }
     },
-    BoardHandlerFleetPlacementQueueTest { //7
+    BoardHandlerFleetPlacementQueue { //7
 
         @Override
         public QueueObject createObjectToSend() {
@@ -105,7 +105,7 @@ public enum QueueType {
             return "7";
         }
     },
-    JudgeStartQueueTest { //8
+    JudgeStartQueue { //8
 
         @Override
         public QueueObject createObjectToSend() {
@@ -118,7 +118,7 @@ public enum QueueType {
         }
     },
 
-    PlayingStateMachinePlayerActionQueueTest { //9
+    PlayingStateMachinePlayerActionQueue { //9
 
         @Override
         public QueueObject createObjectToSend() {
@@ -130,7 +130,7 @@ public enum QueueType {
             return "9";
         }
     },
-    ShotHandlerPlayerShotQueueTest { //10
+    ShotHandlerPlayerShotQueue { //10
 
         @Override
         public QueueObject createObjectToSend() {
@@ -142,7 +142,7 @@ public enum QueueType {
             return "10";
         }
     },
-    MoveHandlerPlayerMoveQueueTest { //11
+    MoveHandlerPlayerMoveQueue { //11
 
         @Override
         public QueueObject createObjectToSend() {
@@ -154,11 +154,11 @@ public enum QueueType {
             return "11";
         }
     },
-    BoardHandlerShotQueryQueueTest { //12
+    BoardHandlerShotQueryQueue { //12
 
         @Override
         public QueueObject createObjectToSend() {
-            return new PlayerShootCoordinate();
+            return new PlayerShootCoordinate(new Player("Jozek", "1337"), new Coordinate(2, 2));
         }
 
         @Override
@@ -166,7 +166,7 @@ public enum QueueType {
             return "12";
         }
     },
-    BoardHandlerMoveQueryQueueTest { //13
+    BoardHandlerMoveQueryQueue { //13
 
         @Override
         public QueueObject createObjectToSend() {
@@ -178,7 +178,7 @@ public enum QueueType {
             return "13";
         }
     },
-    PlayingStateMachineNextRoundStatusQueueTest { //14
+    PlayingStateMachineNextRoundStatusQueue { //14
 
         @Override
         public QueueObject createObjectToSend() {
@@ -190,7 +190,7 @@ public enum QueueType {
             return "14";
         }
     },
-    JudgePlayerShootResultQueueTest { //15
+    JudgePlayerShootResultQueue { //15
 
         @Override
         public QueueObject createObjectToSend() {
@@ -215,7 +215,7 @@ public enum QueueType {
         }
 
     },
-    ShotHandlerFieldStatusQueueTest { //17
+    ShotHandlerFieldStatusQueue { //17
 
         @Override
         public QueueObject createObjectToSend() {
@@ -227,20 +227,21 @@ public enum QueueType {
             return "17";
         }
     },
-    PlayingBoardsViewQueueTest { //18
+    PlayingBoardsViewQueue { //18
 
         @Override
         public QueueObject createObjectToSend() {
             List<Ship> shipList = new ArrayList<>();
             List<Mast> mastList = new ArrayList<>();
+
             mastList.add(new Mast(new Coordinate(1,1)));
             mastList.add(new Mast(new Coordinate(1,2)));
             mastList.add(new Mast(new Coordinate(1,3)));
             shipList.add(new Ship(mastList));
 
-            Map<Coordinate, FieldStateView> fieldStateView = new HashMap<>();
-            fieldStateView.put(new Coordinate(5, 1), FieldStateView.HIT);
-            fieldStateView.put(new Coordinate(3, 2), FieldStateView.MISS);
+            Map<Coordinate, ShootResult> fieldStateView = new HashMap<>();
+            fieldStateView.put(new Coordinate(5, 1), ShootResult.HIT);
+            fieldStateView.put(new Coordinate(3, 2), ShootResult.MISS);
 
             return new BoardsView(new Player("Test", "TestIP"), new PlayerBoardView(new Board(shipList)),
                                     new OpponentBoardView(fieldStateView));
