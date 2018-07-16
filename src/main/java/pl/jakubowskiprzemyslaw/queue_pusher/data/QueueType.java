@@ -1,9 +1,8 @@
 package pl.jakubowskiprzemyslaw.queue_pusher.data;
 
 import pl.jakubowskiprzemyslaw.tajgertim.models.QueueObject;
-import pl.jakubowskiprzemyslaw.tajgertim.models.board.Board;
-import pl.jakubowskiprzemyslaw.tajgertim.models.board.Mast;
-import pl.jakubowskiprzemyslaw.tajgertim.models.board.Ship;
+import pl.jakubowskiprzemyslaw.tajgertim.models.board.*;
+import pl.jakubowskiprzemyslaw.tajgertim.models.configuration.GameConfiguration;
 import pl.jakubowskiprzemyslaw.tajgertim.models.coordinates.Coordinate;
 import pl.jakubowskiprzemyslaw.tajgertim.models.coordinates.FieldState;
 import pl.jakubowskiprzemyslaw.tajgertim.models.coordinates.FieldStatus;
@@ -49,7 +48,7 @@ public enum QueueType {
 
         @Override
         public QueueObject createObjectToSend() {
-            return null;
+            return new GameConfiguration();
         }
 
         @Override
@@ -61,7 +60,15 @@ public enum QueueType {
 
         @Override
         public QueueObject createObjectToSend() {
-            return null;
+            List<Ship> shipList = new ArrayList<>();
+            List<Mast> mastList = new ArrayList<>();
+
+            mastList.add(new Mast(new Coordinate(2,1)));
+            mastList.add(new Mast(new Coordinate(2,2)));
+            mastList.add(new Mast(new Coordinate(2,3)));
+            shipList.add(new Ship(mastList));
+
+            return new FleetPlacement(new Fleet(shipList));
         }
 
         @Override
@@ -97,7 +104,15 @@ public enum QueueType {
 
         @Override
         public QueueObject createObjectToSend() {
-            return null;
+            List<Ship> shipList = new ArrayList<>();
+            List<Mast> mastList = new ArrayList<>();
+
+            mastList.add(new Mast(new Coordinate(1,1)));
+            mastList.add(new Mast(new Coordinate(1,2)));
+            mastList.add(new Mast(new Coordinate(1,3)));
+            shipList.add(new Ship(mastList));
+
+            return new FleetPlacement(new Fleet(shipList));
         }
 
         @Override
@@ -243,7 +258,7 @@ public enum QueueType {
             fieldStateView.put(new Coordinate(5, 1), ShootResult.HIT);
             fieldStateView.put(new Coordinate(3, 2), ShootResult.MISS);
 
-            return new BoardsView(new Player("Test", "TestIP"), new PlayerBoardView(new Board(shipList)),
+            return new BoardsView(new Player("Test", "TestIP"), new PlayerBoardView(new Board(new Fleet(shipList))),
                                     new OpponentBoardView(fieldStateView));
         }
 
