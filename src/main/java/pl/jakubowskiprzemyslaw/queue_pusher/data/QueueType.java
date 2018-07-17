@@ -3,6 +3,7 @@ package pl.jakubowskiprzemyslaw.queue_pusher.data;
 import pl.jakubowskiprzemyslaw.tajgertim.models.QueueObject;
 import pl.jakubowskiprzemyslaw.tajgertim.models.board.*;
 import pl.jakubowskiprzemyslaw.tajgertim.models.configuration.GameConfiguration;
+import pl.jakubowskiprzemyslaw.tajgertim.models.configuration.PlayerConfiguration;
 import pl.jakubowskiprzemyslaw.tajgertim.models.coordinates.Coordinate;
 import pl.jakubowskiprzemyslaw.tajgertim.models.coordinates.FieldState;
 import pl.jakubowskiprzemyslaw.tajgertim.models.coordinates.FieldStatus;
@@ -24,7 +25,7 @@ public enum QueueType {
 
         @Override
         public QueueObject createObjectToSend() {
-            return null;
+            return new PlayerConfiguration(new Player("Grazyna", "906090"));
         }
 
         @Override
@@ -63,12 +64,13 @@ public enum QueueType {
             List<Ship> shipList = new ArrayList<>();
             List<Mast> mastList = new ArrayList<>();
 
-            mastList.add(new Mast(new Coordinate(2,1)));
-            mastList.add(new Mast(new Coordinate(2,2)));
-            mastList.add(new Mast(new Coordinate(2,3)));
+            mastList.add(new Mast(new Coordinate(2, 1)));
+            mastList.add(new Mast(new Coordinate(2, 2)));
+            mastList.add(new Mast(new Coordinate(2, 3)));
             shipList.add(new Ship(mastList));
 
-            return new FleetPlacement(new Fleet(shipList));
+            return new FleetPlacement(new Player("Grazyna", "906090")
+                    , new Fleet(shipList));
         }
 
         @Override
@@ -92,7 +94,7 @@ public enum QueueType {
 
         @Override
         public QueueObject createObjectToSend() {
-            return null;
+            return new PlayerConfiguration(new Player("Janusz", "20"));
         }
 
         @Override
@@ -107,12 +109,12 @@ public enum QueueType {
             List<Ship> shipList = new ArrayList<>();
             List<Mast> mastList = new ArrayList<>();
 
-            mastList.add(new Mast(new Coordinate(1,1)));
-            mastList.add(new Mast(new Coordinate(1,2)));
-            mastList.add(new Mast(new Coordinate(1,3)));
+            mastList.add(new Mast(new Coordinate(3, 1)));
+            mastList.add(new Mast(new Coordinate(3, 2)));
+            mastList.add(new Mast(new Coordinate(3, 3)));
             shipList.add(new Ship(mastList));
 
-            return new FleetPlacement(new Fleet(shipList));
+            return new FleetPlacement(new Player("Janusz", "20"), new Fleet(shipList));
         }
 
         @Override
@@ -249,9 +251,9 @@ public enum QueueType {
             List<Ship> shipList = new ArrayList<>();
             List<Mast> mastList = new ArrayList<>();
 
-            mastList.add(new Mast(new Coordinate(1,1)));
-            mastList.add(new Mast(new Coordinate(1,2)));
-            mastList.add(new Mast(new Coordinate(1,3)));
+            mastList.add(new Mast(new Coordinate(1, 1)));
+            mastList.add(new Mast(new Coordinate(1, 2)));
+            mastList.add(new Mast(new Coordinate(1, 3)));
             shipList.add(new Ship(mastList));
 
             Map<Coordinate, ShootResult> fieldStateView = new HashMap<>();
@@ -259,7 +261,7 @@ public enum QueueType {
             fieldStateView.put(new Coordinate(3, 2), ShootResult.MISS);
 
             return new BoardsView(new Player("Test", "TestIP"), new PlayerBoardView(new Board(new Fleet(shipList))),
-                                    new OpponentBoardView(fieldStateView));
+                    new OpponentBoardView(fieldStateView));
         }
 
         @Override
